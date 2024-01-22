@@ -1,0 +1,85 @@
+Is it possible to use whisper for streaming tasks (with syntax)? For example, would it be possible for whisper to be bound to a websocket of streaming PCM data packets?
+===
+feature_request
+---TEST CASE---
+Is there a simple way to do speaker diarization with whisper ?
+===
+feature_request
+---TEST CASE---
+I really don't know how to explain this, but i call a function which uses transcribe and if i have temp=0 it works fine, but if its not itll run the rest of the function but once it hits the return value, it simply stops running no error or anything. my guess is something to do with a stack allocation bug or something i really dont know. This is the function in question
+
+Args:
+    path (str): Path where the transcription JSON file will be stored.
+    audio_path (str): Path of the audio file to transcribe.
+    url_id (str): video ID, used to name the output JSON file.
+
+Returns:
+    None: The function operates by side effect, transcribing the audio 
+          and saving the transcription to a JSON file at the specified path.
+"""
+
+model = WhisperModel(model_size, device="cuda", compute_type="float16")
+for filename in os.listdir(audio_path):
+    print("model running")
+    start_time = time.time()
+    #Current bug exists in whisper need to keep temp 0 or else program crashes from windows system
+    segments, info = model.transcribe(f'{audio_path}\{filename}', beam_size=5, word_timestamps=True)
+segments = listToSegment(list(segments))
+json_dict = {
+    "text": "Placeholder.",
+    "segments": segments,
+    "language": "en"
+}
+
+with open(f'{path}\{url_id}.json', 'w', encoding='utf-8') as f:
+        json.dump(json_dict, f, ensure_ascii=False, indent=2)
+print("--- %s seconds for model conversion ---" % (time.time() - start_time))
+
+shutil.rmtree(audio_path)
+return
+I've spent hours going in circles before I wanted to ask here.
+
+I also can't find anything thats causing this to terminate like an error message or termination message to share. it doesnt even always terminate on the same line when im debugging
+===
+bug_report
+---TEST CASE---
+I want to transcribe twilio call recordings using whisper in python but i guess whisper doesnt support uris so how do i achieve it
+===
+feature_request
+---TEST CASE---
+If you are implementing any foreign language speaker identification, please figure out a way to get Whisper to do both the original language and the translated language, and to uniquely identify each speaker, and lastly, to output one file with all the multiple languages heard, but also to provide an option to split all unique speakers (or languages) into distinct output files.
+
+When dealing with and English speaker and a foreign translator, or vice-versa, or with a panel of the same...
+
+Of course it's critical to be able to identify unique speakers. Speaker diarization is very important.
+
+A nice polishing feature for diarization would use a post-transcription call to a LLM to relabel "Speaker 1" to the actual person's name. Prior to the saving of the final text file a call could be made to a LLM that includes the full transcript in order to try to find all individual speakers' names and titles. This speaker label name or title is often given at the introduction in a recording, or possibly used in during a discussion. Using a speaker's name or title instead of "Speaker 1" would increase the value of the transcript significantly.
+
+Also, very useful output is to get the full back-and-forth transcription of a speaker and their translator, but also to have the option to transcribe only one person's output, or all individual's transcriptions to separate output files, e.g. "Recording XYZ - Speaker 1", "Recording XYZ - Speaker 2", etc.
+
+(Output with a multiple language translation could be useful in training additional translation LLM's since you'd have a native speaker translating the text.)
+===
+feature_request
+---TEST CASE---
+I tried to run Whisper on command line with Python3.10.9,PyTorch for CUDA11.7 and CUDA11.7,but every time I run it shows "Model has been downloaded but the SHA256 checksum does not not match. Please retry loading the model" and redownload the pt file.It bothered me for a long time,is there an enthusiastic person who can help me?Appreciate.
+
+Total error message:
+PS D:\Test_for_Whisper> whisper audio.mp3
+C:\Users\Albert_Administrator\AppData\Local\Programs\Python\Python310\lib\site-packages\whisper_init_.py:48: UserWarning: C:\Users\Albert_Administrator.cache\whisper\small.pt exists, but the SHA256 checksum does not match; re-downloading the file
+warnings.warn(f"{download_target} exists, but the SHA256 checksum does not match; re-downloading the file")
+99%|██████████████████████████████████████▊| 459M/461M [00:55<00:00, 8.65MiB/s]
+Traceback (most recent call last):
+File "C:\Users\Albert_Administrator\AppData\Local\Programs\Python\Python310\lib\runpy.py", line 196, in _run_module_as_main
+return run_code(code, main_globals, None,
+File "C:\Users\Albert_Administrator\AppData\Local\Programs\Python\Python310\lib\runpy.py", line 86, in run_code
+exec(code, run_globals)
+File "C:\Users\Albert_Administrator\AppData\Local\Programs\Python\Python310\Scripts\whisper.exe_main.py", line 7, in
+File "C:\Users\Albert_Administrator\AppData\Local\Programs\Python\Python310\lib\site-packages\whisper\transcribe.py", line 310, in cli
+model = load_model(model_name, device=device, download_root=model_dir)
+File "C:\Users\Albert_Administrator\AppData\Local\Programs\Python\Python310\lib\site-packages\whisper_init.py", line 108, in load_model
+checkpoint_file = _download(MODELS[name], download_root, in_memory)
+File "C:\Users\Albert_Administrator\AppData\Local\Programs\Python\Python310\lib\site-packages\whisper_init.py", line 62, in _download
+raise RuntimeError("Model has been downloaded but the SHA256 checksum does not not match. Please retry loading the model.")
+RuntimeError: Model has been downloaded but the SHA256 checksum does not not match. Please retry loading the model.
+===
+bug_report

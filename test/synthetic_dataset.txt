@@ -1,0 +1,59 @@
+Customer: "Hi, I've been using your photo editing software. It's great, but I noticed it doesn't have a batch processing feature to edit multiple photos simultaneously. Can this be added?"
+Support: "Thank you for your suggestion! I'll forward your request for a batch processing feature to our development team."
+===
+feature_request
+---TEST CASE---
+Customer: "I recently updated your app, and now it crashes every time I try to open it."
+Support: "I'm sorry to hear that. Could you please provide more details about your device and the app version? We'll look into this issue."
+===
+bug_report
+---TEST CASE---
+Customer: "Can you tell me what the current subscription cost is for your service?"
+Support: "Sure! The current subscription cost is $9.99 per month. Let me know if you have any other questions."
+===
+none
+---TEST CASE---
+Customer: "I like the app, but why can't I export data in CSV format? Also, the sync feature has been failing lately."
+Support: "Thank you for your feedback. We'll consider adding CSV export functionality. Regarding the sync issue, can you provide more details so we can troubleshoot?"
+===
+feature_request,bug_report
+---TEST CASE---
+Customer: "Hi, I've been using your photo editing software. It's great, but I noticed it doesn't have a batch processing feature to edit multiple photos simultaneously. Can this be added?"
+Support: "Thank you for your suggestion! I'll forward your request for a batch processing feature to our development team."
+===
+feature_request
+---TEST CASE---
+Customer: "I recently updated your app, and now it crashes every time I try to open it."
+Support: "I'm sorry to hear that. Could you please provide more details about your device and the app version? We'll look into this issue."
+===
+bug_report
+---TEST CASE---
+Customer: "Can you tell me what the current subscription cost is for your service?"
+Support: "Sure! The current subscription cost is $9.99 per month. Let me know if you have any other questions."
+===
+none
+---TEST CASE---
+Customer: "I like the app, but why can't I export data in CSV format? Also, the sync feature has been failing lately."
+Support: "Thank you for your feedback. We'll consider adding CSV export functionality. Regarding the sync issue, can you provide more details so we can troubleshoot?"
+===
+feature_request,bug_report
+---TEST CASE---
+Customer: "Is there a way to customize notifications in the app? I'd prefer to receive them only for critical updates."
+Support: "Currently, our app doesn't support custom notification settings. However, I'll pass your feedback to our team for future updates."
+===
+feature_request
+---TEST CASE---
+Customer: "The new update seems to have removed the option to view detailed analytics. Was this intentional?"
+Support: "This sounds like an unintended issue. Can you specify which analytics features you're missing? We'll investigate this."
+===
+bug_report
+---TEST CASE---
+Customer: "I'm considering your product. Does it integrate with third-party accounting software?"
+Support: "Yes, our product integrates with several popular accounting software. You can find a list of compatible services on our website."
+===
+none
+---TEST CASE---
+Customer: "Ever since the last update, my dashboard takes forever to load. Also, can you add a dark mode?"
+Support: "We're sorry for the inconvenience. We're working on optimizing loading times. As for dark mode, it's on our roadmap for future releases."
+===
+bug_report,feature_request

@@ -1,0 +1,6 @@
+flask
+uuid
+openai
+gql[all]
+toml
+tqdm
