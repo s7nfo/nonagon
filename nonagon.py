@@ -9,10 +9,10 @@ from nonagon.db import DB
 if __name__ == "__main__":
     config = toml.load("config.toml")
 
-    classifier = Extractor(**config["OpenAI"])
+    extractor = Extractor(**config["OpenAI"])
     issue_tracker = IssueTracker(**config["Linear"])
 
-    backend = Backend(classifier, issue_tracker, DB)
+    backend = Backend(extractor, issue_tracker, DB)
     backend.run()
 
     API.run()

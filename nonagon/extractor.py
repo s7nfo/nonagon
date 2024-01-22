@@ -51,7 +51,7 @@ class Extractor:
                             "related_tickets": {
                                 "type": "array",
                                 "items": {"type": "string"},
-                                "description": "List of IDs for tickets containing similar feature requests",
+                                "description": "List of IDs for tickets containing similar bug reports",
                             },
                         },
                         "required": ["description", "related_tickets"],

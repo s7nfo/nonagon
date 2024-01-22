@@ -12,10 +12,9 @@ def calculate_precision_recall(TP, FP, FN):
 
 if __name__ == "__main__":
     config = toml.load("config.toml")
-    classifier = Extractor(**config["OpenAI"])
+    extractor = Extractor(**config["OpenAI"])
 
-    test_cases = open("test/synthetic_dataset.txt", "r")
-        .read().split("---TEST CASE---\n")
+    test_cases = open("test/synthetic_dataset.txt", "r").read().split("---TEST CASE---\n")
     test_cases += open("test/github_dataset.txt", "r").read().split("---TEST CASE---\n")
 
     TP = 0
@@ -26,10 +25,10 @@ if __name__ == "__main__":
         conversation, categories = test_case.split("===\n")
         actual_categories = {c for c in categories.strip().split(",") if c != "none"}
         predicted_categories = set(
-            c for c, r in classifier.extract(conversation, []).items() if r is not None
+            c for c, r in extractor.extract(conversation, []).items() if r is not None
         )
 
-        classification = classifier.extract(conversation, [])
+        classification = extractor.extract(conversation, [])
         classification = {c for c in classification if not classification[c] is None}
 
         TP += len(predicted_categories & actual_categories)
